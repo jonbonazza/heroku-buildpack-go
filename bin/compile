@@ -228,10 +228,10 @@ case $TOOL in
         cd $p
         if test "$VendorExperiment" = "true"
         then
-            step "Running: go install -v ${FLAGS[@]} $pkgs"
+            step "Running: go install -v ${FLAGS[@]} $(go list $pkg | grep -v /vendor/)"
             go install -v "${FLAGS[@]}" $pkgs
         else
-            step "Running: godep go install ${FLAGS[@]} $pkgs"
+            step "Running: godep go install ${FLAGS[@]} $(go list $pkg | grep -v /vendor/)"
             godep go install "${FLAGS[@]}" $pkgs
         fi
     ;;
